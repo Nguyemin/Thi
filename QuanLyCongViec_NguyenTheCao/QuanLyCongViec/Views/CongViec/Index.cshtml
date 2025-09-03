@@ -1,0 +1,138 @@
+﻿@using QuanLyCongViec.ViewModels
+@model CongviecViewModel
+
+<div class="container mt-5">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex align-items-center">
+            <button data-bs-toggle="modal" data-bs-target="#addModal" class="btn btn-success me-3 shadow-sm">
+                <i class="bi bi-plus-circle"></i> Thêm Công Việc
+            </button>
+            <h2 class="fw-bold text-primary m-0">📌 Quản Lý Công Việc</h2>
+        </div>
+
+        <!-- Tag Filter -->
+        <form asp-action="Index" asp-controller="Congviec" method="get" class="d-flex align-items-center bg-light p-2 rounded shadow-sm">
+            <label for="tagFilter" class="me-2 fw-bold text-dark">Lọc theo Tag:</label>
+            <select name="tag" id="tagFilter" class="form-select w-auto" onchange="this.form.submit()">
+                <option value="">Tất cả</option>
+                @if (Model.CongViecList != null && Model.CongViecList.Any())
+                {
+                    var uniqueTags = Model.CongViecList
+                    .Where(cv => !string.IsNullOrEmpty(cv.Tag))
+                    .Select(cv => cv.Tag)
+                    .Distinct()
+                    .ToList();
+
+                    foreach (var tag in uniqueTags)
+                    {
+                        <option value="@tag" selected="@(tag == (string)ViewBag.SelectedTag)">
+                            @tag
+                        </option>
+                    }
+                }
+            </select>
+        </form>
+    </div>
+
+    <!-- Table -->
+    <div class="card border-0 shadow-lg rounded-4">
+        <div class="card-body">
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tên Công Việc</th>
+                        <th scope="col">Tag</th>
+                        <th scope="col">Trạng Thái</th>
+                        <th scope="col">Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.CongViecList != null && Model.CongViecList.Any())
+                    {
+                        int stt = 1;
+                        foreach (var cv in Model.CongViecList)
+                        {
+                            <tr>
+                                <td class="fw-bold text-secondary">@stt</td>
+                                <td class="text-start">
+                                    <i class="bi bi-check2-square text-success me-1"></i> @cv.TenCongViec
+                                </td>
+                                <td>
+                                    <span class="badge bg-info text-dark px-3 py-2 rounded-pill">@cv.Tag</span>
+                                </td>
+                                <td>
+                                    <form asp-action="ToggleStatus" asp-controller="Congviec" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="@cv.Id" />
+                                        <button type="submit" class="btn btn-sm rounded-pill px-3 shadow-sm @(cv.TrangThai ? "btn-success" : "btn-warning")">
+                                            @(cv.TrangThai ? "✔ Hoàn thành" : "⏳ Đang thực hiện")
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <button data-bs-toggle="modal" data-bs-target="#deleteModal_@cv.Id" class="btn btn-sm btn-outline-danger rounded-pill px-3 shadow-sm">
+                                        <i class="bi bi-trash"></i> Xóa
+                                    </button>
+                                </td>
+                            </tr>
+                            stt++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">✨ Chưa có công việc nào</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example" class="mt-4">
+        <ul class="pagination justify-content-center shadow-sm">
+            <li class="page-item"><a class="page-link" href="#">« Trước</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Tiếp »</a></li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Modal Create -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <partial name="_Create" model="@Model"></partial>
+    </div>
+</div>
+
+<!-- Modal Delete -->
+@if (Model.CongViecList != null)
+{
+    foreach (var cv in Model.CongViecList)
+    {
+        <div class="modal fade" id="deleteModal_@cv.Id" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <form asp-action="Delete" asp-controller="Congviec" method="post">
+                    <div class="modal-content shadow-lg border-0 rounded-4">
+                        <div class="modal-header bg-danger text-white rounded-top-4">
+                            <h5 class="modal-title"><i class="bi bi-exclamation-triangle-fill me-2"></i> Xác nhận xóa</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="Id" value="@cv.Id" />
+                            <p>Bạn có chắc chắn muốn xóa công việc <strong>@cv.TenCongViec</strong> không?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light border shadow-sm" data-bs-dismiss="modal">Bỏ qua</button>
+                            <button type="submit" class="btn btn-danger shadow-sm">Đồng ý</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+}

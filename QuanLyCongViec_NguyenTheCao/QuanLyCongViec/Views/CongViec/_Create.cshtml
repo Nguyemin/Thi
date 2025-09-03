@@ -1,0 +1,28 @@
+﻿﻿@using QuanLyCongViec.Controllers
+@using QuanLyCongViec.ViewModels
+@model CongviecViewModel
+<form asp-action="Create" method="post">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm mới Công việc</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="nameCv" class="form-label">Tên Công việc</label>
+                <input type="text" class="form-control" id="nameCv"
+                       asp-for="Request.TenCongViec" value="@ViewData["name"]">
+            </div>
+            <div class="mb-3">
+                <label for="tagCv" class="form-label">Tag</label>
+                <input type="text" class="form-control" id="tagCv"
+                       asp-for="Request.Tag">
+            </div>
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bỏ qua</button>
+            <button type="submit" class="btn btn-primary">Đồng ý</button>
+        </div>
+    </div>
+</form>
