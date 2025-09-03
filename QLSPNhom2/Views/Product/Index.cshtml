@@ -1,0 +1,79 @@
+﻿@using QLSPNhom2.ViewModel
+@model ProductViewModel
+<h1 class="text-center text-gradient mb-4">📦 Quản Lý Sản Phẩm</h1>
+
+<div class="d-flex justify-content-end mb-3">
+    <button data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-outline-primary shadow-sm">
+        <i class="fa-solid fa-plus"></i> Thêm Mới
+    </button>
+</div>
+
+@* <div class="mb-3">
+    <label class="form-label fw-bold">📁 Danh mục</label>
+    <select id="category" class="form-select border-primary">
+        <option value="0">Tất cả</option>
+        @if (Model.Categories != null)
+        {
+            foreach (var cat in Model.Categories)
+            {
+                <option value="@cat.Id">@cat.Name</option>
+            }
+        }
+    </select>
+</div>
+
+<div class="d-flex mt-3 mb-3">
+    <input onkeypress="onEnter(event)" id="keyWord" name="keyWord" class="form-control me-2 border-info shadow-sm" type="text" placeholder="🔍 Nhập từ khóa cần tìm" />
+    <button onclick="onSearch()" type="button" class="btn btn-success shadow-sm">
+        <i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
+    </button>
+</div> *@
+<label for="category" class="form-label fw-bold me-2">📁 Danh mục</label>
+<div class="d-flex align-items-center mb-3">
+    
+    <select id="category" class="form-select border-primary me-2" style="width: 200px;">
+        <option value="0">Tất cả</option>
+        @if (Model.Categories != null)
+        {
+            foreach (var cat in Model.Categories)
+            {
+                <option value="@cat.Id">@cat.Name</option>
+            }
+        }
+    </select>
+
+    <input onkeypress="onEnter(event)" id="keyWord" name="keyWord" class="form-control border-info shadow-sm me-2" type="text" placeholder="🔍 Nhập từ khóa cần tìm" />
+
+    <button onclick="onSearch()" type="button" class="btn btn-success btn-sm shadow-sm">
+        <i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
+    </button>
+</div>
+
+<div id="products">
+    <partial name="_List" model="Model" />
+</div>
+
+
+<!-- Thêm mới sản phẩm -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <partial name="_Create" model="@Model" />
+    </div>
+</div>
+
+
+@if (Model.Products != null)
+{
+    @foreach (var prod in Model.Products)
+    {
+        var vm = new QLSPNhom2.ViewModel.ProductViewModel
+        {
+            Categories = Model.Categories,
+            Respone = prod
+        };
+
+        <partial name="_Update" model="vm" />
+        <partial name="_Delete" model="vm" />
+    }
+
+}

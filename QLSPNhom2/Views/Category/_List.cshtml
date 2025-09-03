@@ -1,0 +1,66 @@
+﻿@model QLSPNhom2.ViewModel.CategoryViewModel
+<div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle text-center">
+        <thead style="background: linear-gradient(to right, #a1c4fd, #c2e9fb); color: #003366;">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mã Danh Mục</th>
+                <th scope="col">Tên Danh Mục</th>
+                <th scope="col">Thao Tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Categories != null && Model.Categories.Any())
+            {
+                int i = (Model.PageIndex - 1) * Model.PageSize;
+                foreach (var category in Model.Categories)
+                {
+                    <tr style="background-color: #f9fbfd;">
+                        <td>@(++i)</td>
+                        <td>@category.Id</td>
+                        <td class="text-start">@category.Name</td>
+                        <td>
+                            <div class="d-flex justify-content-center gap-2">
+                                <button data-bs-toggle="modal" data-bs-target="#updateModal_@category.Id" class="btn btn-sm" style="background-color: #6dd5ed; color: white;">
+                                    <i class="fa-solid fa-pencil"></i> Sửa
+                                </button>
+                                <button data-bs-toggle="modal" data-bs-target="#deleteModal_@category.Id" class="btn btn-sm" style="background-color: #ff6a6a; color: white;">
+                                    <i class="fa-solid fa-trash"></i> Xóa
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-muted">Không có danh mục nào.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Phân trang -->
+<nav aria-label="...">
+    <ul class="pagination justify-content-end">
+        <li class="page-item @((Model.PageIndex ==1) ? "disabled" : "")">
+            <a asp-action="Index" asp-controller="Category"
+               asp-route-pageIndex="@(Model.PageIndex-1)" asp-route-pageSize="@Model.PageSize" class="page-link">Trang Trước</a>
+        </li>
+
+        @for (int i = 1; i<= Model.PageCount; i++)
+        {
+            <li class="page-item @((Model.PageIndex ==i) ? " active" : "")">
+                <a asp-action="Index" asp-controller="Category"
+                   asp-route-pageIndex="@i" as-route-pageSize="@Model.PageSize" class="page-link">@i</a>
+            </li>
+        }
+
+        <li class="page-item @((Model.PageIndex == Model.PageCount) ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-controller="Category"
+               asp-route-pageIndex="@(Model.PageIndex+1)" asp-route-pageSize="@Model.PageSize">Trang Sau</a>
+        </li>
+    </ul>
+</nav>

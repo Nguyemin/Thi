@@ -1,0 +1,50 @@
+﻿@using QLSPNhom2.ViewModel
+@model ProductViewModel
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Thêm mới sản phẩm</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+            <div class="mb-3">
+                <label class="form-label">Danh Mục<span class="text-danger">*</span></label>
+                <select asp-for="Request.IDCategory" class="form-control">
+                   @if (Model.Categories != null)
+                    {
+                        foreach(var cat in Model.Categories)
+                        {
+                            <option value="@cat.Id">@cat.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tên sản phẩm<span class="text-danger">*</span></label>
+                <input asp-for="Request.Name" type="text" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Giá sản phẩm<span class="text-danger">*</span></label>
+                <input asp-for="Request.Price" type="number" step="0.1" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Số lượng sản phẩm<span class="text-danger">*</span></label>
+                <input asp-for="Request.Quantity" type="number" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Hình sản phẩm<span class="text-danger">*</span></label>
+                <input asp-for="Request.FormFileAvatar" type="file" accept="image/*" class="form-control" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bỏ qua</button>
+            <button type="submit" class="btn btn-primary">Đồng ý</button>
+        </div>
+    </div>
+</form>

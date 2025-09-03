@@ -1,0 +1,32 @@
+﻿@model QLSPNhom2.ViewModel.CategoryViewModel
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold text-primary">📦 Danh Sách Danh Mục Sản Phẩm</h2>
+        <button data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-outline-primary">
+            <i class="fa-solid fa-plus"></i> Thêm Mới
+        </button>
+    </div>
+
+    <form asp-controller="Category" asp-action="Index" method="post" class="mb-4">
+        <div class="input-group">
+            <input name="keyWord" class="form-control" type="text" placeholder="🔍 Nhập từ khóa cần tìm" />
+            <button type="submit" class="btn btn-success">
+                <i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
+            </button>
+        </div>
+    </form>
+</div>
+
+<partial name="_List" model="@Model" />
+<partial name="_Create" model="@Model" />
+
+@if (Model.Categories != null)
+{
+    foreach(var cat in Model.Categories)
+    {
+        Model.Response = cat;
+        <partial name="_Update" model="@Model" />
+        <partial name="_Delete" model="@Model" />
+    }
+}
+

@@ -1,0 +1,144 @@
+﻿@using QLSPNhom2.ViewModel
+@model ProductViewModel
+@* <table class="table table-hover table-bordered">
+    <tr class="table-success">
+        <th>STT</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Hình đại diện</th>
+        <th>Danh mục</th>
+        <th>Thao tác</th>
+    </tr>
+    @if (Model.Products != null && Model.Products.Count > 0)
+    {
+        int i = (Model.PageIndex -1) * Model.PageSize;
+        foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@(++i)</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Quantity</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(product.Avatar))
+                    {
+                        <img style="width:100px" src="@product.Avatar" />
+                    }
+                    else
+                    {
+                        <span class="text-danger">Chưa có hình đại diện</span>
+                    }
+                </td>
+                <td>
+                    @if (product.NameCategory != null)
+                    {
+                        @product.NameCategory
+                    }
+                    else
+                    {
+                        <span class="text-danger">Chưa có danh mục</span>
+                    }
+                </td>
+                <td>
+                    <button onclick="loadViewUpdate(@product.ID)" data-bs-toggle="modal" data-bs-target="#updateModal_@product.ID" class="btn btn-primary">
+                        <i class="fa-solid fa-pencil"></i> Sửa
+                    </button>
+
+                    <button onclick="loadViewUpdate(@product.ID)" data-bs-toggle="modal" data-bs-target="#deleteModal_@product.ID" class="btn btn-danger">
+                        <i class="fa-solid fa-trash"></i> Xóa
+                    </button>
+                </td>
+                
+            </tr>
+        }
+    }
+    else
+    {
+        <tr><td colspan="7">Không có sản phẩm nào cả</td></tr>
+    }
+
+</table> *@
+
+<table class="table table-bordered table-hover align-middle shadow-sm">
+    <thead class="table-light">
+        <tr class="text-center text-primary fw-bold">
+            <th>STT</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Hình đại diện</th>
+            <th>Danh mục</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Products != null && Model.Products.Count > 0)
+        {
+            int i = (Model.PageIndex -1) * Model.PageSize;
+            foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td class="text-center">@(++i)</td>
+                    <td>@product.Name</td>
+                    <td class="text-end text-success">@product.Price.ToString("N0") ₫</td>
+                    <td class="text-center">@product.Quantity</td>
+                    <td class="text-center">
+                        @if (!string.IsNullOrEmpty(product.Avatar))
+                        {
+                            <img src="@product.Avatar" class="rounded border" style="width:80px; height:auto;" />
+                        }
+                        else
+                        {
+                            <span class="text-muted fst-italic">Chưa có hình</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        @if (product.NameCategory != null)
+                        {
+                            <span class="badge bg-info text-dark">@product.NameCategory</span>
+                        }
+                        else
+                        {
+                            <span class="text-warning">Chưa có danh mục</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        <button onclick="loadViewUpdate(@product.ID)" data-bs-toggle="modal" data-bs-target="#updateModal_@product.ID" class="btn btn-sm btn-outline-primary me-1">
+                            <i class="fa-solid fa-pencil"></i>
+                        </button>
+                        <button onclick="loadViewUpdate(@product.ID)" data-bs-toggle="modal" data-bs-target="#deleteModal_@product.ID" class="btn btn-sm btn-outline-danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center text-muted">Không có sản phẩm nào cả</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Phân trang -->
+<nav aria-label="...">
+    <ul class="pagination justify-content-end">
+        <li class="page-item @((Model.PageIndex ==1) ? "disabled" : "")">
+            <a onclick="onPaging(@(Model.PageIndex-1))" class="page-link">Trang Trước</a>
+        </li>
+
+        @for (int i = 1; i<= Model.PageCount; i++)
+        {
+            <li class="page-item @((Model.PageIndex ==i) ? " active" : "")">
+                <a onclick="onPaging(@i)" class="page-link">@i</a>
+            </li>
+        }
+
+        <li class="page-item @((Model.PageIndex == Model.PageCount) ? "disabled" : "")">
+            <a class="page-link" onclick="onPaging(@(Model.PageIndex+1))">Trang Sau</a>
+        </li>
+    </ul>
+</nav>

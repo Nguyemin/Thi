@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\LTWEB\\QLSPNhom2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EF1BAE09-C61E-4D39-BA4C-F197199F90B8}|QLSPNhom2.csproj|d:\\ltweb\\qlspnhom2\\views\\category\\_list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EF1BAE09-C61E-4D39-BA4C-F197199F90B8}|QLSPNhom2.csproj|solutionrelative:views\\category\\_list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF1BAE09-C61E-4D39-BA4C-F197199F90B8}|QLSPNhom2.csproj|d:\\ltweb\\qlspnhom2\\views\\category\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EF1BAE09-C61E-4D39-BA4C-F197199F90B8}|QLSPNhom2.csproj|solutionrelative:views\\category\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF1BAE09-C61E-4D39-BA4C-F197199F90B8}|QLSPNhom2.csproj|d:\\ltweb\\qlspnhom2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EF1BAE09-C61E-4D39-BA4C-F197199F90B8}|QLSPNhom2.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLSPNhom2\\Views\\Category\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Category\\Index.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLSPNhom2\\Views\\Category\\Index.cshtml",
+              "RelativeToolTip": "Views\\Category\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-03T09:00:08.085Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_List.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLSPNhom2\\Views\\Category\\_List.cshtml",
+              "RelativeDocumentMoniker": "Views\\Category\\_List.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLSPNhom2\\Views\\Category\\_List.cshtml",
+              "RelativeToolTip": "Views\\Category\\_List.cshtml",
+              "ViewState": "AgIAABAAAAAAAAAAAAAcwCoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-03T08:59:39.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLSPNhom2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLSPNhom2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T09:40:20.775Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
